@@ -1,0 +1,382 @@
+{
+    "FileInfo": {
+        "Version": {
+            "Major": 1,
+            "Minor": 3,
+            "Patch": 0
+        },
+        "CreatedAt": "2023-04-25T15:03:27.4719776-04:00",
+        "UpdatedAt": "0001-01-01T00:00:00"
+    },
+    "streamer": {
+        "name": "TitaTitanium",
+        "id": 47574923
+    },
+    "video": {
+        "title": "test",
+        "id": "1803413887",
+        "created_at": "2023-04-25T19:00:46Z",
+        "start": 0,
+        "end": 68,
+        "length": 68,
+        "chapters": []
+    },
+    "comments": [
+        {
+            "_id": "",
+            "created_at": "2023-04-25T19:00:50.925Z",
+            "channel_id": "47574923",
+            "content_type": "video",
+            "content_id": "1803413887",
+            "content_offset_seconds": 3,
+            "commenter": {
+                "display_name": "NeopetaBot",
+                "_id": "599331388",
+                "name": "neopetabot",
+                "bio": "Bot for TitaTitanium's stream.",
+                "created_at": "2020-10-24T05:54:52.992461Z",
+                "updated_at": "2023-04-25T18:56:21.437335Z",
+                "logo": "https://static-cdn.jtvnw.net/jtv_user_pictures/08fd32dc-0ed9-420c-986e-a49ea84d0b26-profile_image-300x300.png"
+            },
+            "message": {
+                "body": "test",
+                "bits_spent": 0,
+                "fragments": [
+                    {
+                        "text": "test",
+                        "emoticon": null
+                    }
+                ],
+                "user_badges": [
+                    {
+                        "_id": "vip",
+                        "version": "1"
+                    }
+                ],
+                "user_color": null,
+                "emoticons": []
+            }
+        },
+        {
+            "_id": "",
+            "created_at": "2023-04-25T19:00:51.919Z",
+            "channel_id": "47574923",
+            "content_type": "video",
+            "content_id": "1803413887",
+            "content_offset_seconds": 4,
+            "commenter": {
+                "display_name": "NeopetaBot",
+                "_id": "599331388",
+                "name": "neopetabot",
+                "bio": "Bot for TitaTitanium's stream.",
+                "created_at": "2020-10-24T05:54:52.992461Z",
+                "updated_at": "2023-04-25T18:56:21.437335Z",
+                "logo": "https://static-cdn.jtvnw.net/jtv_user_pictures/08fd32dc-0ed9-420c-986e-a49ea84d0b26-profile_image-300x300.png"
+            },
+            "message": {
+                "body": "test",
+                "bits_spent": 0,
+                "fragments": [
+                    {
+                        "text": "test",
+                        "emoticon": null
+                    }
+                ],
+                "user_badges": [
+                    {
+                        "_id": "vip",
+                        "version": "1"
+                    }
+                ],
+                "user_color": null,
+                "emoticons": []
+            }
+        },
+        {
+            "_id": "",
+            "created_at": "2023-04-25T19:00:53.41Z",
+            "channel_id": "47574923",
+            "content_type": "video",
+            "content_id": "1803413887",
+            "content_offset_seconds": 5,
+            "commenter": {
+                "display_name": "NeopetaBot",
+                "_id": "599331388",
+                "name": "neopetabot",
+                "bio": "Bot for TitaTitanium's stream.",
+                "created_at": "2020-10-24T05:54:52.992461Z",
+                "updated_at": "2023-04-25T18:56:21.437335Z",
+                "logo": "https://static-cdn.jtvnw.net/jtv_user_pictures/08fd32dc-0ed9-420c-986e-a49ea84d0b26-profile_image-300x300.png"
+            },
+            "message": {
+                "body": "monkaS",
+                "bits_spent": 0,
+                "fragments": [
+                    {
+                        "text": "monkaS",
+                        "emoticon": null
+                    }
+                ],
+                "user_badges": [
+                    {
+                        "_id": "vip",
+                        "version": "1"
+                    }
+                ],
+                "user_color": null,
+                "emoticons": []
+            }
+        },
+        {
+            "_id": "",
+            "created_at": "2023-04-25T19:01:03.046Z",
+            "channel_id": "47574923",
+            "content_type": "video",
+            "content_id": "1803413887",
+            "content_offset_seconds": 15,
+            "commenter": {
+                "display_name": "NeopetaBot",
+                "_id": "599331388",
+                "name": "neopetabot",
+                "bio": "Bot for TitaTitanium's stream.",
+                "created_at": "2020-10-24T05:54:52.992461Z",
+                "updated_at": "2023-04-25T18:56:21.437335Z",
+                "logo": "https://static-cdn.jtvnw.net/jtv_user_pictures/08fd32dc-0ed9-420c-986e-a49ea84d0b26-profile_image-300x300.png"
+            },
+            "message": {
+                "body": "PepeHands",
+                "bits_spent": 0,
+                "fragments": [
+                    {
+                        "text": "PepeHands",
+                        "emoticon": null
+                    }
+                ],
+                "user_badges": [
+                    {
+                        "_id": "vip",
+                        "version": "1"
+                    }
+                ],
+                "user_color": null,
+                "emoticons": []
+            }
+        },
+        {
+            "_id": "",
+            "created_at": "2023-04-25T19:01:21.82Z",
+            "channel_id": "47574923",
+            "content_type": "video",
+            "content_id": "1803413887",
+            "content_offset_seconds": 34,
+            "commenter": {
+                "display_name": "NeopetaBot",
+                "_id": "599331388",
+                "name": "neopetabot",
+                "bio": "Bot for TitaTitanium's stream.",
+                "created_at": "2020-10-24T05:54:52.992461Z",
+                "updated_at": "2023-04-25T18:56:21.437335Z",
+                "logo": "https://static-cdn.jtvnw.net/jtv_user_pictures/08fd32dc-0ed9-420c-986e-a49ea84d0b26-profile_image-300x300.png"
+            },
+            "message": {
+                "body": "monkaSTEER",
+                "bits_spent": 0,
+                "fragments": [
+                    {
+                        "text": "monkaSTEER",
+                        "emoticon": null
+                    }
+                ],
+                "user_badges": [
+                    {
+                        "_id": "vip",
+                        "version": "1"
+                    }
+                ],
+                "user_color": null,
+                "emoticons": []
+            }
+        },
+        {
+            "_id": "",
+            "created_at": "2023-04-25T19:01:33.546Z",
+            "channel_id": "47574923",
+            "content_type": "video",
+            "content_id": "1803413887",
+            "content_offset_seconds": 45,
+            "commenter": {
+                "display_name": "TitaTitanium",
+                "_id": "47574923",
+                "name": "titatitanium",
+                "bio": "Hi! I'm Titanium, and my friends call me Tita for short. People have decided I am a mouse. If you'd like to get a feel for what I do, check out my Highlights and Uploads!",
+                "created_at": "2013-08-14T07:17:29.272748Z",
+                "updated_at": "2023-04-25T00:09:23.057188Z",
+                "logo": "https://static-cdn.jtvnw.net/jtv_user_pictures/772f0ff0-3f6d-4cdd-a96f-2d6941e9aa6d-profile_image-300x300.png"
+            },
+            "message": {
+                "body": "test",
+                "bits_spent": 0,
+                "fragments": [
+                    {
+                        "text": "test",
+                        "emoticon": null
+                    }
+                ],
+                "user_badges": [
+                    {
+                        "_id": "broadcaster",
+                        "version": "1"
+                    },
+                    {
+                        "_id": "subscriber",
+                        "version": "0"
+                    },
+                    {
+                        "_id": "bits-charity",
+                        "version": "1"
+                    }
+                ],
+                "user_color": "#1E90FF",
+                "emoticons": []
+            }
+        },
+        {
+            "_id": "",
+            "created_at": "2023-04-25T19:01:34.345Z",
+            "channel_id": "47574923",
+            "content_type": "video",
+            "content_id": "1803413887",
+            "content_offset_seconds": 46,
+            "commenter": {
+                "display_name": "TitaTitanium",
+                "_id": "47574923",
+                "name": "titatitanium",
+                "bio": "Hi! I'm Titanium, and my friends call me Tita for short. People have decided I am a mouse. If you'd like to get a feel for what I do, check out my Highlights and Uploads!",
+                "created_at": "2013-08-14T07:17:29.272748Z",
+                "updated_at": "2023-04-25T00:09:23.057188Z",
+                "logo": "https://static-cdn.jtvnw.net/jtv_user_pictures/772f0ff0-3f6d-4cdd-a96f-2d6941e9aa6d-profile_image-300x300.png"
+            },
+            "message": {
+                "body": "test",
+                "bits_spent": 0,
+                "fragments": [
+                    {
+                        "text": "test",
+                        "emoticon": null
+                    }
+                ],
+                "user_badges": [
+                    {
+                        "_id": "broadcaster",
+                        "version": "1"
+                    },
+                    {
+                        "_id": "subscriber",
+                        "version": "0"
+                    },
+                    {
+                        "_id": "bits-charity",
+                        "version": "1"
+                    }
+                ],
+                "user_color": "#1E90FF",
+                "emoticons": []
+            }
+        },
+        {
+            "_id": "",
+            "created_at": "2023-04-25T19:01:35.902Z",
+            "channel_id": "47574923",
+            "content_type": "video",
+            "content_id": "1803413887",
+            "content_offset_seconds": 48,
+            "commenter": {
+                "display_name": "TitaTitanium",
+                "_id": "47574923",
+                "name": "titatitanium",
+                "bio": "Hi! I'm Titanium, and my friends call me Tita for short. People have decided I am a mouse. If you'd like to get a feel for what I do, check out my Highlights and Uploads!",
+                "created_at": "2013-08-14T07:17:29.272748Z",
+                "updated_at": "2023-04-25T00:09:23.057188Z",
+                "logo": "https://static-cdn.jtvnw.net/jtv_user_pictures/772f0ff0-3f6d-4cdd-a96f-2d6941e9aa6d-profile_image-300x300.png"
+            },
+            "message": {
+                "body": "monkaS",
+                "bits_spent": 0,
+                "fragments": [
+                    {
+                        "text": "monkaS",
+                        "emoticon": null
+                    }
+                ],
+                "user_badges": [
+                    {
+                        "_id": "broadcaster",
+                        "version": "1"
+                    },
+                    {
+                        "_id": "subscriber",
+                        "version": "0"
+                    },
+                    {
+                        "_id": "bits-charity",
+                        "version": "1"
+                    }
+                ],
+                "user_color": "#1E90FF",
+                "emoticons": []
+            }
+        },
+        {
+            "_id": "",
+            "created_at": "2023-04-25T19:01:41.453Z",
+            "channel_id": "47574923",
+            "content_type": "video",
+            "content_id": "1803413887",
+            "content_offset_seconds": 53,
+            "commenter": {
+                "display_name": "TitaTitanium",
+                "_id": "47574923",
+                "name": "titatitanium",
+                "bio": "Hi! I'm Titanium, and my friends call me Tita for short. People have decided I am a mouse. If you'd like to get a feel for what I do, check out my Highlights and Uploads!",
+                "created_at": "2013-08-14T07:17:29.272748Z",
+                "updated_at": "2023-04-25T00:09:23.057188Z",
+                "logo": "https://static-cdn.jtvnw.net/jtv_user_pictures/772f0ff0-3f6d-4cdd-a96f-2d6941e9aa6d-profile_image-300x300.png"
+            },
+            "message": {
+                "body": "titati1NEOPETA",
+                "bits_spent": 0,
+                "fragments": [
+                    {
+                        "text": "titati1NEOPETA",
+                        "emoticon": {
+                            "emoticon_id": "emotesv2_1d8c4aa1d99345a1a747fb8859b2b0b3"
+                        }
+                    }
+                ],
+                "user_badges": [
+                    {
+                        "_id": "broadcaster",
+                        "version": "1"
+                    },
+                    {
+                        "_id": "subscriber",
+                        "version": "0"
+                    },
+                    {
+                        "_id": "bits-charity",
+                        "version": "1"
+                    }
+                ],
+                "user_color": "#1E90FF",
+                "emoticons": [
+                    {
+                        "_id": "emotesv2_1d8c4aa1d99345a1a747fb8859b2b0b3",
+                        "begin": 0,
+                        "end": 15
+                    }
+                ]
+            }
+        }
+    ],
+    "embeddedData": null
+}
