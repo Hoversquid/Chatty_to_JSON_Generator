@@ -6,7 +6,7 @@ Second argument is optional to add a custom video start time.
 
 Command should look like this: 
 
-`py .\Chatty_JSON_Generator.py 'Text\2023-04-25_streamer.log' '2023-04-25 15:00:47 -0400`
+`py .\Chatty_JSON_Generator.py 'Text\2023-04-25_streamer.log' '2023-04-25 15:00:47 -0400'`
 
 ----------------------------------------------------------------------------
 
