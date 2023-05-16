@@ -57,13 +57,13 @@ if __name__ == "__main__":
 
     print('args: ' + ' '.join(sys.argv))
 
-    with open(log_file_path) as f:
-    # with open(sys.argv[1]) as f:
+    # with open(log_file_path) as f:
+    with open(sys.argv[1]) as f:
         lines = f.readlines()
 
     # Read the initial timecode
-    if len(sys.argv) > 1 != None and sys.argv[1] is not None:
-        dateList = sys.argv[1].split(' ')
+    if len(sys.argv) > 1 != None and sys.argv[2] is not None:
+        dateList = sys.argv[2].split(' ')
     else: 
         dateList = lines[0].split(': ')[1].replace('\r\n', '').split(' ')
 
