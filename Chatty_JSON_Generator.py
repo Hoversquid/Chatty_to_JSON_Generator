@@ -46,13 +46,14 @@ class ChatTimeKeeper:
         # - dateList: [yyy, mm, dd]
         # - timeList: [hh, mm, ss]
 
-        # print('timeList: ' + ', '.join(timeList))
+        # If no date is provided, use the one stored on the Timekeeper
         if dateList is None:
              year = self.date.year
              month = self.date.month
              day = self.date.day
+             
+        # Otherwise, set it from the provided list
         else:
-            print('dateList: ' + ', '.join(dateList))
             year = int(dateList[0])
             month = int(dateList[1])
             day = int(dateList[2])
