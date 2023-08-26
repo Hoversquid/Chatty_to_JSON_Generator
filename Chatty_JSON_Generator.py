@@ -52,8 +52,8 @@ class ChatTimeKeeper:
     
 if __name__ == "__main__":
     script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
-    rel_path = "Text\\2023-04-25_titatitanium.log"
-    log_file_path = os.path.join(script_dir, rel_path)
+    # rel_path = "Text\\yourlog.log"
+    # log_file_path = os.path.join(script_dir, rel_path)
 
     print('args: ' + ' '.join(sys.argv))
 
