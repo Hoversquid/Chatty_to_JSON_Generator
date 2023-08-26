@@ -8,8 +8,14 @@ from datetime import datetime, timedelta
 class ChatTimeKeeper:
     def __init__(self, dateList, timeList, timeOffset):
 
-        self.timeOffset = int(timeOffset)
+        self.timeOffset = 0
         self.createdDate = self.convertTimeStamp(dateList, timeList)
+        print('Time keeper created at ' + str(self.createdDate))
+        if timeOffset != 0:
+        
+            self.timeOffset = int(timeOffset)
+            print('with time offset: ' + str(timeOffset))
+
         self.date = self.createdDate
 
     def getTimeStamp(self, withTimeZone):
@@ -22,62 +28,97 @@ class ChatTimeKeeper:
             
         return dateToPrint.strftime('%Y-%m-%dT%H:%M:%S') + timeOffset
     
+    # sets the new time of the Timekeeper with a date object
     def setNewTime(self, newTime):
-        timeDiff = newTime - self.date
-        self.date += timeDiff
+
+        # Needs to get difference in time and add a day to the elapsed time if it passes the 24 hour mark
+        if newTime < self.date:
+            newTime += timedelta(days=1)
+
+        self.date = newTime
         createdTimeDiff = newTime - self.createdDate
         return createdTimeDiff.total_seconds()
 
+    # takes two lists of strings to create a datetime object
     def convertTimeStamp(self, dateList, timeList):
 
-        # dateList: yyy, mm, dd
-        # timeList: hh, mm, ss
+        # format of input lists given here:
+        # - dateList: [yyy, mm, dd]
+        # - timeList: [hh, mm, ss]
 
+        # print('timeList: ' + ', '.join(timeList))
         if dateList is None:
              year = self.date.year
              month = self.date.month
              day = self.date.day
-             hour = self.date.hour
         else:
+            print('dateList: ' + ', '.join(dateList))
             year = int(dateList[0])
             month = int(dateList[1])
             day = int(dateList[2])
-            hour = int(timeList[0])
+
+        hour = int(timeList[0])
 
         newDateTime = datetime(year, month, day, hour, int(timeList[1]), int(timeList[2]))
-        if dateList is not None:
+
+        # If using a time offset, use it here
+        if self.timeOffset != 0:
             newDateTime = newDateTime - timedelta(hours=self.timeOffset)
 
         return newDateTime
-    
+
+
+
 if __name__ == "__main__":
-    script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
+    # This section can read a relative path:
+    # script_dir = os.path.dirname(__file__) # <-- absolute dir the script is in
     # rel_path = "Text\\yourlog.log"
     # log_file_path = os.path.join(script_dir, rel_path)
 
     print('args: ' + ' '.join(sys.argv))
 
-    # with open(log_file_path) as f:
-    with open(sys.argv[1]) as f:
-        lines = f.readlines()
+    # This is the list of labels for the required arguments and their order
+    # Argument amount can match to different label sets for future use cases
+    argValNames = ['pyFile', 'file', 'timestamp', 'name', 'id']
+    if len(sys.argv) != len(argValNames):
+        print('ERROR: Incorrect amount of arguments.')
+        print('Provide the arguments listed: ' + ', '.join(argValNames))
+        sys.exit(0)
+    
+    # Handle each argument in order
+    for argPos in range(len(argValNames)):
+        currLabel = argValNames[argPos]
+        match currLabel:
+            case 'timestamp':
+                dateList = sys.argv[argPos].split(' ')
+            case 'name':
+                streamerName = sys.argv[argPos]
+            case 'id':
+                streamerId = sys.argv[argPos]
+            case 'file':
+                with open(sys.argv[argPos], encoding='utf-8') as file:
+                    lines = file.readlines()
 
-    # Read the initial timecode
-    if len(sys.argv) > 1 != None and sys.argv[2] is not None:
-        dateList = sys.argv[2].split(' ')
-    else: 
-        dateList = lines[0].split(': ')[1].replace('\r\n', '').split(' ')
+    # This line can read the 'Log Started' line in Chatty, might be useful?    
+    # dateList = lines[0].split(': ')[1].replace('\r\n', '').split(' ')
 
-    timeList = dateList[1].split(':')    
-    timeZone = (dateList[-1][0:-3] + ':' + dateList[-1][-3:-1]).split(':')[0]
+    # This line can read the Streamer name from Chatty but I'm just going to require it as an arg
+    # streamerName = lines[1][lines[1].find('#'):lines[1].find('..')]
 
-    timeKeeper = ChatTimeKeeper(dateList[0].split('-'), timeList, timeZone)
+    # timeList is the hours, minutes, seconds pulled from the timestamp as a list
+    timeList = dateList[1].split(':')   
 
-    streamerName = lines[1][lines[1].find('#'):lines[1].find('..')]
+    # if the time given has a time offset, set it
+    if len(dateList) == 3:
+        timeOffset = dateList[2][0:-2]
+    else:
+        timeOffset = 0
 
-    del lines[0:3]
+    # Create the timekeeper with the date argument as its starting point
+    timeKeeper = ChatTimeKeeper(dateList[0].split('-'), timeList, timeOffset)
 
+    # Gets user display name and badge information from extracted Chatty line user data
     def getUserInfo(displayName):
-        print('displayName: ' + displayName)
         readingBadges = True
         badgeJSON = []
         while readingBadges:
@@ -92,26 +133,51 @@ if __name__ == "__main__":
 
         return displayName, badgeJSON
         
-    commentJSONLines = {"comments": []}
-
+    # Concatenate the lines in an array
+    commentJSONLines = []
     video_creation_time = timeKeeper.getTimeStamp(False)
 
     for line in lines:
+        # Log messages start with a #, skip for now until the timestamp is needed to be parsed
+        if line[0] == '#':
+            # print('LOG LINE: ' + line)
+            continue
+
+        # Getting rid of anything that doesn't start with a timestamp just to be safe
+        if line[0] != '[':
+            # print('NO TIMESTAMP LINE: ' + line)
+            continue
+
+        # Parse the timestamp
+        createdDateTime = timeKeeper.convertTimeStamp(None, line[1:9].split(':'))
+        
+        # Only display messages after the start time
+        if createdDateTime < timeKeeper.createdDate:
+            # print('TOO EARLY LINE: ' + line)
+            continue
+
+        # User names are surrounded with '< >' tags that start after the timestamp
         startOfNameIndex = line[10:12]
 
         # Don't create comment for non-user messages
         if startOfNameIndex != ' <':
+            # print('NO NAME LINE: ' + line)
             continue
 
         
-        createdDateTime = timeKeeper.convertTimeStamp(None, line[1:9].split(':'))
+        # Get seconds between the timekeeper start and the message
         offsetSeconds = timeKeeper.setNewTime(createdDateTime)
+
+        # Save the timecode to store on the JSON
         timeCode = timeKeeper.getTimeStamp(False)
+
+        # Extract user info and message to put into a spoofed JSON file
         endOfNameIndex = line.find('> ')
         displayName = line[12:endOfNameIndex]
-
         message = line[endOfNameIndex+2:].replace('\n', '')
         name, badgeJSON = getUserInfo(displayName)
+
+        # Pretty much all of this can be left blank
         commentJSON = {
             "_id": "", 
             "created_at": str(timeCode),
@@ -143,8 +209,10 @@ if __name__ == "__main__":
             }
         }
 
-        commentJSONLines['comments'].append(commentJSON) 
+        commentJSONLines.append(commentJSON) 
+        # End of JSON generation loop
 
+    # Make header level data
     fileJSON = {
         "FileInfo": {
             "Version": {
@@ -172,5 +240,9 @@ if __name__ == "__main__":
         "embeddedData": None
     }
 
-    with open("sample.json", "w") as outfile:
+    # Name file here:
+    fileName = 'output.json'
+
+    # Create new json file in folder
+    with open(fileName, "w") as outfile:
         json.dump(fileJSON, outfile, indent=4)
