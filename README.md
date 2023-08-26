@@ -12,4 +12,4 @@ Can be given with or without time offset, but it shouldn't make a difference if 
 Third argument is the streamer name.
 
 
-Fourth argument is the streamer's twitch ID
+Fourth argument is the streamer's twitch ID.
