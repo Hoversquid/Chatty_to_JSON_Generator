@@ -2,6 +2,7 @@ import sys
 import json
 import os
 import re
+import random 
 
 from datetime import datetime, timedelta
 
@@ -68,6 +69,9 @@ class ChatTimeKeeper:
 
         return newDateTime
 
+class User:
+    def __init__(self, displayName):
+        self.displayName = displayName
 
 
 if __name__ == "__main__":
@@ -76,6 +80,8 @@ if __name__ == "__main__":
     # rel_path = "Text\\yourlog.log"
     # log_file_path = os.path.join(script_dir, rel_path)
 
+    userList = []
+    userColorMap = {}
     print('args: ' + ' '.join(sys.argv))
 
     # This is the list of labels for the required arguments and their order
@@ -136,6 +142,7 @@ if __name__ == "__main__":
         
     # Concatenate the lines in an array
     commentJSONLines = []
+    userMap = []
     video_creation_time = timeKeeper.getTimeStamp(False)
 
     for line in lines:
@@ -178,40 +185,48 @@ if __name__ == "__main__":
         message = line[endOfNameIndex+2:].replace('\n', '')
         name, badgeJSON = getUserInfo(displayName)
 
-        # Pretty much all of this can be left blank
-        commentJSON = {
-            "_id": "", 
-            "created_at": str(timeCode),
-            "channel_id": "", 
-            "content_type": "video", 
-            "content_id": "",
-            "content_offset_seconds": int(offsetSeconds),
-            "commenter": {
-                "display_name": name,
-                "_id": "",
-                "name": "",
-                "bio": "",
-                "created_at": "",
-                "updated_at": "",
-                "logo": ""
-            },
-            "message": {
-                "body": message,
-                "bits_spent": 0,
-                "fragments": [
-                    {
-                        "text":  message,
-                        "emoticon": None
-                    }
-                ],
-                "user_badges": badgeJSON,
-                "user_color": None,
-                "emoticons": []
-            }
-        }
+        if displayName not in userList:
+            userList.add(displayName)
 
-        commentJSONLines.append(commentJSON) 
-        # End of JSON generation loop
+    index = 0
+    for hexColor in random.sample(range(16**32), len(userList)):
+        userColorMap[userList[index].displayName] = f"{hexColor:#06x}"
+        index += 1
+        
+    # Pretty much all of this can be left blank
+    commentJSON = {
+        "_id": "", 
+        "created_at": str(timeCode),
+        "channel_id": "", 
+        "content_type": "video", 
+        "content_id": "",
+        "content_offset_seconds": int(offsetSeconds),
+        "commenter": {
+            "display_name": name,
+            "_id": "",
+            "name": "",
+            "bio": "",
+            "created_at": "",
+            "updated_at": "",
+            "logo": ""
+        },
+        "message": {
+            "body": message,
+            "bits_spent": 0,
+            "fragments": [
+                {
+                    "text":  message,
+                    "emoticon": None
+                }
+            ],
+            "user_badges": badgeJSON,
+            "user_color": None,
+            "emoticons": []
+        }
+    }
+
+    commentJSONLines.append(commentJSON) 
+    # End of JSON generation loop
 
     # Make header level data
     fileJSON = {
