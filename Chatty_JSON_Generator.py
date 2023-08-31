@@ -210,7 +210,7 @@ if __name__ == "__main__":
 
     index = 0
     for hexColor in random.sample(range(256**3), len(userList)):
-        print('setting: ' + str(userList[index] + ' to: ' + str(hexColor)))
+        # print('setting: ' + str(userList[index] + ' to: ' + str(hexColor)))
         formattedHex = f"{hexColor:#08x}"
         userColorMap[userList[index]] = f"#{formattedHex[2:]}"
         index += 1
