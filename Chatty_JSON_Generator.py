@@ -73,6 +73,14 @@ class User:
     def __init__(self, displayName):
         self.displayName = displayName
 
+class Message:
+    def __init__(self, createdDateTime, offsetSeconds, timeCode, userName, message, badgeJSON):
+        self.createdDateTime = createdDateTime
+        self.offsetSeconds = offsetSeconds
+        self.timeCode = timeCode
+        self.userName = userName
+        self.message = message
+        self.badgeJSON = badgeJSON
 
 if __name__ == "__main__":
     # This section can read a relative path:
@@ -130,8 +138,16 @@ if __name__ == "__main__":
         badgeJSON = []
         while readingBadges:
             if displayName[0] == '!':
+                print('displayName: ' + str(displayName) + ' is VIP')
                 displayName = displayName[1:]
+                print('displayName is now ' + displayName)
                 badgeJSON.append({"_id": "vip", "version": "1"})
+            elif displayName[0] == '%':
+                # Don't know what this token means lol, just removing it
+                print('displayName: ' + str(displayName) + ' is something')
+                displayName = displayName[1:]
+                print('displayName is now ' + displayName)
+
             elif displayName[0:2] == '~%':
                 displayName = displayName[2:]
                 badgeJSON.append({ "_id": "broadcaster", "version": "1" })
@@ -143,6 +159,7 @@ if __name__ == "__main__":
     # Concatenate the lines in an array
     commentJSONLines = []
     userMap = []
+    commentMessages = []
     video_creation_time = timeKeeper.getTimeStamp(False)
 
     for line in lines:
@@ -184,49 +201,58 @@ if __name__ == "__main__":
         displayName = line[12:endOfNameIndex]
         message = line[endOfNameIndex+2:].replace('\n', '')
         name, badgeJSON = getUserInfo(displayName)
+        commentMessages.append(Message(createdDateTime, offsetSeconds, timeCode, name, message, badgeJSON))
 
-        if displayName not in userList:
-            userList.add(displayName)
+        if name not in userList:
+            userList.append(name)
+
+        # End of message processing loop
 
     index = 0
-    for hexColor in random.sample(range(16**32), len(userList)):
-        userColorMap[userList[index].displayName] = f"{hexColor:#06x}"
+    for hexColor in random.sample(range(256**3), len(userList)):
+        print('setting: ' + str(userList[index] + ' to: ' + str(hexColor)))
+        formattedHex = f"{hexColor:#08x}"
+        userColorMap[userList[index]] = f"#{formattedHex[2:]}"
         index += 1
-        
-    # Pretty much all of this can be left blank
-    commentJSON = {
-        "_id": "", 
-        "created_at": str(timeCode),
-        "channel_id": "", 
-        "content_type": "video", 
-        "content_id": "",
-        "content_offset_seconds": int(offsetSeconds),
-        "commenter": {
-            "display_name": name,
-            "_id": "",
-            "name": "",
-            "bio": "",
-            "created_at": "",
-            "updated_at": "",
-            "logo": ""
-        },
-        "message": {
-            "body": message,
-            "bits_spent": 0,
-            "fragments": [
-                {
-                    "text":  message,
-                    "emoticon": None
-                }
-            ],
-            "user_badges": badgeJSON,
-            "user_color": None,
-            "emoticons": []
-        }
-    }
 
-    commentJSONLines.append(commentJSON) 
-    # End of JSON generation loop
+    for message in commentMessages:
+        userColor = userColorMap.get(message.userName)
+        # print('userName: ' + str(message.userName) + ' color: ' + str(userColor))
+        
+        # Pretty much all of this can be left blank
+        commentJSON = {
+            "_id": "", 
+            "created_at": str(message.timeCode),
+            "channel_id": "", 
+            "content_type": "video", 
+            "content_id": "",
+            "content_offset_seconds": int(message.offsetSeconds),
+            "commenter": {
+                "display_name": message.userName,
+                "_id": "",
+                "name": "",
+                "bio": "",
+                "created_at": "",
+                "updated_at": "",
+                "logo": ""
+            },
+            "message": {
+                "body": message.message,
+                "bits_spent": 0,
+                "fragments": [
+                    {
+                        "text":  message.message,
+                        "emoticon": None
+                    }
+                ],
+                "user_badges": message.badgeJSON,
+                "user_color": userColor,
+                "emoticons": []
+            }
+        }
+
+        commentJSONLines.append(commentJSON) 
+        # End of JSON generation loop
 
     # Make header level data
     fileJSON = {
