@@ -138,19 +138,18 @@ if __name__ == "__main__":
         badgeJSON = []
         while readingBadges:
             if displayName[0] == '!':
-                print('displayName: ' + str(displayName) + ' is VIP')
                 displayName = displayName[1:]
-                print('displayName is now ' + displayName)
                 badgeJSON.append({"_id": "vip", "version": "1"})
             elif displayName[0] == '%':
-                # Don't know what this token means lol, just removing it
-                print('displayName: ' + str(displayName) + ' is something')
+                badgeJSON.append({"_id": "subscriber", "version": "0"})
                 displayName = displayName[1:]
-                print('displayName is now ' + displayName)
-
+            elif displayName[0] == '@':
+                displayName = displayName[1:]
+                badgeJSON.append({ "_id": "moderator", "version": "1" })
             elif displayName[0:2] == '~%':
                 displayName = displayName[2:]
                 badgeJSON.append({ "_id": "broadcaster", "version": "1" })
+
             else:
                 readingBadges = False
 
