@@ -132,6 +132,7 @@ if __name__ == "__main__":
     # Create the timekeeper with the date argument as its starting point
     timeKeeper = ChatTimeKeeper(dateList[0].split('-'), timeList, timeOffset)
 
+    # Dictionary containing the badge codes and what to append if it is part of a display name
     badgeDict = {
         '!': {"_id": "vip", "version": "1"},
         '%': {"_id": "subscriber", "version": "0"},
@@ -150,7 +151,7 @@ if __name__ == "__main__":
 
             # Splicing the given display name by the amount of badge characters, this can serve as the index to check the dictionary
             badgeDictKey = displayName[0:badgeTextSize] 
-            print(f'checking for key: {badgeDictKey}')
+
             # Checks the dictionary to see if the spliced display name has any of listed badge types
             if badgeDictKey in badgeDict.keys():
                 displayName = displayName[badgeTextSize:]
