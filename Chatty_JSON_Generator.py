@@ -143,7 +143,7 @@ if __name__ == "__main__":
     # Gets user display name and badge information from extracted Chatty line user data
     def getUserInfo(displayName):
         badgeJSON = []
-        
+
         for key in badgeDict.keys():
 
             # Amount of characters of the badge text
@@ -216,17 +216,17 @@ if __name__ == "__main__":
 
         # End of message processing loop
 
+    # This creates non-repeating hex values to be used as the color of the display name
+    # Needs to be updated for saved user colors brought in from other chat logs
     index = 0
     for hexColor in random.sample(range(256**3), len(userList)):
-        # print('setting: ' + str(userList[index] + ' to: ' + str(hexColor)))
         formattedHex = f"{hexColor:#08x}"
         userColorMap[userList[index]] = f"#{formattedHex[2:]}"
         index += 1
 
     for message in commentMessages:
         userColor = userColorMap.get(message.userName)
-        # print('userName: ' + str(message.userName) + ' color: ' + str(userColor))
-        
+
         # Pretty much all of this can be left blank
         commentJSON = {
             "_id": "", 
@@ -295,4 +295,5 @@ if __name__ == "__main__":
 
     # Create new json file in folder
     with open(fileName, "w") as outfile:
+        print(f'saving output to {fileName}')
         json.dump(fileJSON, outfile, indent=4)
