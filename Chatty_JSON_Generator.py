@@ -149,7 +149,8 @@ if __name__ == "__main__":
             # Amount of characters of the badge text
             badgeTextSize = len(key)
 
-            # Splicing the given display name by the amount of badge characters, this can serve as the index to check the dictionary
+            # Splicing the given display name by the amount of badge characters, 
+            # this can serve as the index to check the dictionary
             badgeDictKey = displayName[0:badgeTextSize] 
 
             # Checks the dictionary to see if the spliced display name has any of listed badge types
