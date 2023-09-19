@@ -132,26 +132,33 @@ if __name__ == "__main__":
     # Create the timekeeper with the date argument as its starting point
     timeKeeper = ChatTimeKeeper(dateList[0].split('-'), timeList, timeOffset)
 
+    badgeDict = {
+        '!': {"_id": "vip", "version": "1"},
+        '%': {"_id": "subscriber", "version": "0"},
+        '@': { "_id": "moderator", "version": "1" },
+        '~%': { "_id": "broadcaster", "version": "1" }
+    }
+
     # Gets user display name and badge information from extracted Chatty line user data
     def getUserInfo(displayName):
-        readingBadges = True
         badgeJSON = []
-        while readingBadges:
-            if displayName[0] == '!':
-                displayName = displayName[1:]
-                badgeJSON.append({"_id": "vip", "version": "1"})
-            elif displayName[0] == '%':
-                badgeJSON.append({"_id": "subscriber", "version": "0"})
-                displayName = displayName[1:]
-            elif displayName[0] == '@':
-                displayName = displayName[1:]
-                badgeJSON.append({ "_id": "moderator", "version": "1" })
-            elif displayName[0:2] == '~%':
-                displayName = displayName[2:]
-                badgeJSON.append({ "_id": "broadcaster", "version": "1" })
+        checkAmount = len(badgeDict.keys())
+        for key in badgeDict.keys():
 
+            # Amount of characters of the badge text
+            badgeTextSize = len(key)
+
+            # Splicing the given display name by the amount of badge characters, this can serve as the index to check the dictionary
+            badgeDictKey = displayName[0:badgeTextSize] 
+            print(f'checking for key: {badgeDictKey}')
+            # Checks the dictionary to see if the spliced display name has any of listed badge types
+            if badgeDictKey in badgeDict.keys():
+                displayName = displayName[badgeTextSize:]
+                badgeJSON.append(badgeDict[badgeDictKey])
+
+            # If no keys are found, no more known badges exist and can break out of the loop
             else:
-                readingBadges = False
+                break
 
         return displayName, badgeJSON
         
