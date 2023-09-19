@@ -143,7 +143,7 @@ if __name__ == "__main__":
     # Gets user display name and badge information from extracted Chatty line user data
     def getUserInfo(displayName):
         badgeJSON = []
-        checkAmount = len(badgeDict.keys())
+        
         for key in badgeDict.keys():
 
             # Amount of characters of the badge text
