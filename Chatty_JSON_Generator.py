@@ -29,13 +29,8 @@ class ChatTimeKeeper:
             
         return dateToPrint.strftime('%Y-%m-%dT%H:%M:%S') + timeOffset
     
-    # sets the new time of the Timekeeper with a date object
+    # Sets the new time of the Timekeeper with a date object
     def setNewTime(self, newTime):
-
-        # Needs to get difference in time and add a day to the elapsed time if it passes the 24 hour mark
-        if newTime < self.date:
-            newTime += timedelta(days=1)
-
         self.date = newTime
         createdTimeDiff = newTime - self.createdDate
         return createdTimeDiff.total_seconds()
@@ -62,6 +57,10 @@ class ChatTimeKeeper:
         hour = int(timeList[0])
 
         newDateTime = datetime(year, month, day, hour, int(timeList[1]), int(timeList[2]))
+
+        # Needs to get difference in time and add a day to the elapsed time if it passes the 24 hour mark
+        if hasattr(self, 'date') and newDateTime < self.date:
+            newDateTime += timedelta(hours=24)
 
         # If using a time offset, use it here
         if self.timeOffset != 0:
@@ -183,7 +182,7 @@ if __name__ == "__main__":
 
         # Parse the timestamp
         createdDateTime = timeKeeper.convertTimeStamp(None, line[1:9].split(':'))
-        
+
         # Only display messages after the start time
         if createdDateTime < timeKeeper.createdDate:
             # print('TOO EARLY LINE: ' + line)
